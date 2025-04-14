@@ -1,0 +1,190 @@
+الجزء الأول: البدء
+1. إنشاء مستودع Git
+الخطوة: إنشاء مجلد جديد يسمى story، الدخول إليه، وتهيئة مستودع Git.
+الأوامر:
+
+mkdir story
+cd story
+git init
+
+
+2. كتابة النص في ملف جديد
+الخطوة: إنشاء ملف chapter1.txt وكتابة الفقرة التالية فيه:
+
+Once upon a time, in a village named "Init", lived a brave adventurer named Git.
+الأوامر:
+
+echo Once upon a time, in a village named "Init", lived a brave adventurer named Git. > chapter1.txt
+
+
+3. إضافة الملف إلى منطقة التهيئة (Staging Area)
+الخطوة: إضافة chapter1.txt إلى منطقة التهيئة.
+الأمر:
+
+git add chapter1.txt
+
+
+4. الالتزام بالتغييرات (Commit)
+الخطوة: الالتزام بالتغييرات مع رسالة "Chapter 1: Introduce Git from Init village".
+
+git commit -m "Chapter 1: Introduce Git from Init village"
+
+
+
+5. التحقق من حالة المستودع
+الخطوة: استخدام git status للتحقق من حالة المجلد العامل ومنطقة التهيئة.
+الأمر:
+
+git status
+
+
+6. عرض التغييرات في آخر التزام
+الخطوة: استخدام git show لعرض تفاصيل آخر التزام.
+الأمر:
+git show
+
+7. عرض سجل الالتزامات
+الخطوة: استخدام git log وgit log --oneline لعرض سجل الالتزامات.
+الأوامر:
+
+git log
+git log --oneline
+
+
+8. توسيع القصة
+الخطوة: إضافة المزيد إلى chapter1.txt:
+
+Git was well-known for his curiosity and eagerness to learn.
+He had one dream - to explore the mysterious world of Version Control.
+
+الأوامر:
+
+echo Git was well-known for his curiosity and eagerness to learn. >> chapter1.txt
+echo He had one dream - to explore the mysterious world of Version Control. >> chapter1.txt
+
+
+
+9. إضافة التغييرات إلى منطقة التهيئة
+الخطوة: إضافة التغييرات إلى منطقة التهيئة.
+الأمر:
+
+git add chapter1.txt
+
+
+10. الالتزام بالتغييرات الجديدة
+الخطوة: الالتزام بالتغييرات مع رسالة "Chapter 1: Extended story".
+الأمر:
+
+git commit -m "Chapter 1: Extended story"
+
+
+11. عرض التغييرات وسجل الالتزامات
+الخطوة: استخدام git show وgit log مرة أخرى.
+الأوامر:
+
+git show
+git log
+
+
+
+****************************************************************************
+
+
+الجزء الثاني: التفرع والدمج
+1. إنشاء فرع جديد والانتقال إليه
+الخطوة: إنشاء فرع جديد يسمى chapter2 والانتقال إليه.
+الأوامر:
+
+git branch chapter2
+git checkout chapter2
+
+
+2. كتابة فصل جديد
+الخطوة: إضافة فقرة جديدة إلى chapter2.txt:
+
+Chapter 2: Git's Decision
+Git, after much contemplation, decided to leave his home in Init to
+explore the vast world of Version Control.
+الأوامر:
+
+echo Chapter 2: Git's Decision > chapter2.txt
+echo Git, after much contemplation, decided to leave his home in Init to >> chapter2.txt
+echo explore the vast world of Version Control. >> chapter2.txt
+
+
+
+3. الالتزام بالتغييرات
+الخطوة: إضافة وتسجيل التغييرات في الفرع chapter2.
+الأوامر:
+
+
+git add chapter2.txt
+git commit -m "Chapter 2: Git's decision"
+
+
+4. العودة إلى الفرع الرئيسي والدمج
+الخطوة: العودة إلى الفرع master ودمج chapter2 فيه.
+الأوامر:
+
+
+git checkout master
+git merge chapter2
+
+
+
+5. إنشاء سيناريو دمج غير سريع (Non-Fast-Forward)
+الخطوة: إنشاء فرع جديد chapter3، إضافة ملف جديد، ثم تعديل الفرع master لإنشاء سيناريو دمج غير سريع.
+الأوامر:
+
+git checkout -b chapter3
+echo Chapter 3: Git's First Step into the World of Version Control > chapter3.txt
+echo With a heavy heart and a bag full of hopes, Git took his first step >> chapter3.txt
+echo into the world unknown. >> chapter3.txt
+git add chapter3.txt
+git commit -m "Chapter 3: Git's first step"
+git checkout master
+echo Another line in master. >> chapter1.txt
+git add chapter1.txt
+git commit -m "Update chapter1 in master"
+git merge chapter3
+
+
+
+6. إنشاء تعارض دمج (Merge Conflict)
+الخطوة: إنشاء فرع جديد alternate-story، تعديل السطر الأول في chapter1.txt، ثم تعديل نفس السطر في master بشكل مختلف، وحل التعارض.
+الأوامر:
+
+git checkout -b alternate-story
+notepad chapter1.txt
+غيّر السطر الأول إلى:
+
+Once upon a time, in a town named "Init", lived an enthusiastic explorer named Git.
+احفظ الملف، ثم:
+
+git add chapter1.txt
+git commit -m "Change village to town in alternate-story"
+git checkout master
+notepad chapter1.txt
+غيّر السطر الأول إلى:
+
+Once upon a time, in a village named "Init", lived a brave adventurer named Git.
+احفظ الملف، ثم:
+
+
+git add chapter1.txt
+git commit -m "Update first line in master"
+git merge alternate-story
+
+
+****************************************************************************************
+الخلاصة
+وبهذا قد نكون مارسنا:
+
+إنشاء مستودع Git وإضافة ملفات (git init, git add, git commit).
+التحقق من الحالة وعرض التغييرات (git status, git show, git log).
+إنشاء الفروع والتنقل بينها (git branch, git checkout).
+دمج الفروع (دمج سريع وغير سريع) وحل تعارضات الدمج (git merge).
+
+
+
+
